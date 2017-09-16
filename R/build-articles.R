@@ -53,6 +53,7 @@
 #' @param encoding The encoding of the input files.
 #' @param quiet Set to `FALSE` to display output of knitr and
 #'   pandoc. This is useful when debugging.
+#' @param toc_depth The depth for table of contents in articles.
 #' @export
 build_articles <- function(pkg = ".", path = "docs/articles", depth = 1L,
                            encoding = "UTF-8", quiet = TRUE, toc_depth = 2) {
