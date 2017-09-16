@@ -104,7 +104,7 @@ render_rmd <- function(pkg,
                        depth = 1L,
                        encoding = "UTF-8",
                        quiet = TRUE, 
-                       toc_depth = toc_depth) {
+                       toc_depth = 2) {
 
   message("Building article '", output_file, "'")
   scoped_package_context(pkg$package, pkg$topic_index, pkg$article_index)
