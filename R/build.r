@@ -155,7 +155,8 @@ build_site <- function(pkg = ".",
                        mathjax = TRUE,
                        preview = interactive(),
                        seed = 1014,
-                       encoding = "UTF-8"
+                       encoding = "UTF-8",
+                       toc_depth = 2
                        ) {
   old <- set_pkgdown_env("true")
   on.exit(set_pkgdown_env(old))
@@ -175,7 +176,7 @@ build_site <- function(pkg = ".",
     path = file.path(path, "reference"),
     depth = 1L
   )
-  build_articles(pkg, path = file.path(path, "articles"), depth = 1L, encoding = encoding)
+  build_articles(pkg, path = file.path(path, "articles"), depth = 1L, encoding = encoding, toc_depth = toc_depth)
   build_news(pkg, path = file.path(path, "news"), depth = 1L)
 
   if (preview) {
