@@ -55,7 +55,7 @@
 #'   pandoc. This is useful when debugging.
 #' @export
 build_articles <- function(pkg = ".", path = "docs/articles", depth = 1L,
-                           encoding = "UTF-8", quiet = TRUE) {
+                           encoding = "UTF-8", quiet = TRUE, toc_depth = 2) {
   old <- set_pkgdown_env("true")
   on.exit(set_pkgdown_env(old))
 
@@ -108,7 +108,7 @@ render_rmd <- function(pkg,
   scoped_package_context(pkg$package, pkg$topic_index, pkg$article_index)
   scoped_file_context(depth = depth)
 
-  format <- build_rmarkdown_format(pkg, depth = depth, data = data, toc = toc)
+  format <- build_rmarkdown_format(pkg, depth = depth, data = data, toc = toc, toc_depth = toc_depth)
   on.exit(unlink(format$path), add = TRUE)
 
   path <- callr::r_safe(
@@ -129,7 +129,8 @@ render_rmd <- function(pkg,
 build_rmarkdown_format <- function(pkg = ".",
                                    depth = 1L,
                                    data = list(),
-                                   toc = TRUE) {
+                                   toc = TRUE,
+                                   toc_depth = toc_depth) {
   # Render vignette template to temporary file
   path <- tempfile(fileext = ".html")
   suppressMessages(
@@ -140,7 +141,7 @@ build_rmarkdown_format <- function(pkg = ".",
     path = path,
     format = rmarkdown::html_document(
       toc = toc,
-      toc_depth = 2,
+      toc_depth = toc_depth,
       self_contained = FALSE,
       theme = NULL,
       template = path
